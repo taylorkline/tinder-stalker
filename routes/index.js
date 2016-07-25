@@ -5,7 +5,6 @@ const utils = require('./utils');
 
 const async = require('async');
 
-
 // id : facebook_id  -- token : access_token
 router.get('/:id/:token', (req, res) => {
     //res.json({facebook_id: req.params.id, access_token: req.params.token});
@@ -45,7 +44,7 @@ router.get('/:id/:token', (req, res) => {
                       console.log('ERROR3', err);
                   }
                   console.log('NINICO', data);
-                  res.render('../index', { data: data });
+                  res.render('results', { data: data });
                   //res.json(data);
               });
 

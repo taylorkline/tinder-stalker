@@ -5,6 +5,7 @@ const routes = require('./routes');
 const querystring = require('querystring');
 
 app.set('view engine', 'jade');
+app.set('views', __dirname+'/views');
 
 app.all('/*', function(req, res, next) {
   // CORS headers
@@ -19,8 +20,12 @@ app.all('/*', function(req, res, next) {
   }
 });
 
+app.get('/', (req, res) => {
+    res.render('index');
+});
+
 app.use('/n2b', routes);
 
 app.listen('8000', () => {
-    console.log('connected port 8000');
+    console.log('Server is listening on port 8000, go to http://localhost:8000');
 });

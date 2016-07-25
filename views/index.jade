@@ -1,0 +1,27 @@
+doctype html
+html
+  head
+    title my jade template
+  body
+    h1 Nicolas2bert
+    h2 Go to http://localhost:8000/n2b/FACEBOOK_ID/FACEBOOK_TOKEN
+
+    h3 How do I get my FACEBOOK_TOKEN?
+
+    h4.
+      This link is going to simulate a connection to tinder using Facebook
+    h4.
+      Click :
+      #[a(href="https://www.facebook.com/dialog/oauth?client_id=464891386855067&redirect_uri=https://www.facebook.com/connect/login_success.html&response_type=token") Click here ]
+    h4.
+      This link is going to redirect you to another url :
+      https://www.facebook.com/connect/login_success.html#access_token=FACEBOOK_TOKEN&expires_in=6761
+    h4.
+      You have to get your FACEBOOK_TOKEN from this URL.
+
+    h3 How do I get my FACEBOOK_ID?
+
+    h4.
+      Really straight forward :
+      go to your Facebook profile :
+      https://www.facebook.com/FACEBOOK_ID
