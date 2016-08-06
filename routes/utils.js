@@ -28,8 +28,8 @@ utils.getMyInfos = (facebook_id, facebook_token, cb) => {
         });
 
         res.on('end', () => {
-          const body = Buffer.concat(chunks);
-          cb(null, JSON.parse(body.toString()));
+            const body = Buffer.concat(chunks);
+            cb(null, JSON.parse(body.toString()));
         });
 
         res.on('error', (err) => {
@@ -101,12 +101,18 @@ utils.getUserInfo = (tinder_token, tinder_id, cb) => {
         });
 
         res.on('end', () => {
-          const body = Buffer.concat(chunks);
-          cb(null, JSON.parse(body.toString()));
+            const body = Buffer.concat(chunks);
+            try{
+                const manonBody = JSON.parse(body.toString())
+            }catch(e){
+                console.log('manonerror',e);
+                return cb(null, {});
+            }
+            return cb(null, manonBody);
         });
 
         res.on('error', (err) => {
-            cb(err, null)
+            return cb(err, null)
         });
 
     });

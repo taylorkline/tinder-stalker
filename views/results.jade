@@ -1,9 +1,10 @@
 ul
   each val in data
     li
-    h1= val.name
-    h3= val.bio
-    h4= val.connection_count
-    h4= val.ping_time
-    each photo in val.photos
-      img(src= photo.url)
+    if val
+      h1= val.name
+      h3= val.bio
+      h4= val.connection_count
+      h4= val.ping_time
+      each photo in val.photos
+        img(src= photo.url)
