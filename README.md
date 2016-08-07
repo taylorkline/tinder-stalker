@@ -45,6 +45,7 @@ https://www.facebook.com/connect/login_success.html#access_token=FACEBOOK_TOKEN&
 #### How do I get my Facebook id (FACEBOOK_ID)?
 
 Go to your Facebook profile : https://www.facebook.com/FACEBOOK_ID
+and get your FACEBOOK_ID
 
 
 ### Start stalking
