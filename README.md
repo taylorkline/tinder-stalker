@@ -37,6 +37,7 @@ There are 2 more variables (FACEBOOK_TOKEN and FACEBOOK_ID) that we need to prov
 
 This link is going to simulate a connection to Tinder using Facebook :
 [Click here](https://www.facebook.com/dialog/oauth?client_id=464891386855067&redirect_uri=https://www.facebook.com/connect/login_success.html&response_type=token)
+
 You have 3 seconds to copy past the redirect URL from the link above and extract your FACEBOOK_TOKEN
 The URL should look like this:
 https://www.facebook.com/connect/login_success.html#access_token=FACEBOOK_TOKEN&expires_in=6761
