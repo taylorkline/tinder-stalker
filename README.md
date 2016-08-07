@@ -4,64 +4,55 @@ Stalking your Facebook friends on Tinder
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+### Installing
 
-### Prerequisities
-
-What things you need to install the software and how to install them
+#### Clone source code
 
 ```
 git clone https://github.com/nicolas2bert/tinder-stalker.git
-Give examples
 ```
 
-### Installing
+#### Install js dependencies
 
-A step by step series of examples that tell you have to get a development env running
-
-Stay what the step will be
+Go to the tinder-stalker folder,
 
 ```
-Give the example
+npm install
 ```
 
-And repeat
+#### Start your tinder-stalker local server
 
 ```
-until finished
+npm start
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+Server is listening on port 8000, go to http://localhost:8000
 
-## Running the tests
 
-Explain how to run the automated tests for this system
+### Facebook access Token (FACEBOOK_TOKEN) & Facebook id (FACEBOOK_ID)
 
-### Break down into end to end tests
+There are 2 more variables (FACEBOOK_TOKEN and FACEBOOK_ID) that we need to provide to our tinder-stalker server before we can start stalking 
 
-Explain what these tests test and why
+#### How do I get my Facebook access Token (FACEBOOK_TOKEN)?
 
-```
-Give an example
-```
+This link is going to simulate a connection to Tinder using Facebook :
+[Click here](https://www.facebook.com/dialog/oauth?client_id=464891386855067&redirect_uri=https://www.facebook.com/connect/login_success.html&response_type=token)
+You have 3 seconds to copy past the redirect URL from the link above and extract your FACEBOOK_TOKEN
+The URL should look like this:
+https://www.facebook.com/connect/login_success.html#access_token=FACEBOOK_TOKEN&expires_in=6761
 
-### And coding style tests
+#### How do I get my Facebook id (FACEBOOK_ID)?
 
-Explain what these tests test and why
+Go to your Facebook profile : https://www.facebook.com/FACEBOOK_ID
 
-```
-Give an example
-```
 
-## Deployment
+### Start stalking
 
-Add additional notes about how to deploy this on a live system
+Now you are ready to start:
 
-## Built With
+Go to: http://localhost:8000/n2b/FACEBOOK_ID/FACEBOOK_TOKEN
 
-* Dropwizard - Bla bla bla
-* Maven - Maybe
-* Atom - ergaerga
+You will see all of your Facebook friend on Tinder
 
 ## Contributing
 
@@ -73,16 +64,10 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Nicolas2Bert** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
