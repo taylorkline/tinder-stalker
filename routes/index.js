@@ -7,7 +7,7 @@ const async = require('async');
 
 // id : facebook_id  -- token : access_token
 router.get('/:id/:token', (req, res) => {
-    //res.json({facebook_id: req.params.id, access_token: req.params.token});
+    // res.json({facebook_id: req.params.id, access_token: req.params.token});
     const facebookId = req.params.id;
     const facebookToken = req.params.token;
     utils.getMyInfos(
@@ -17,7 +17,7 @@ router.get('/:id/:token', (req, res) => {
           if (err) {
             console.log('ERROR', err);
           }
-          const tinderToken = data['token'];
+          const tinderToken = data.token;
           console.log('working', tinderToken);
           utils.getAllMyFBFriend(tinderToken, (err, data) => {
               if (err) {
@@ -34,17 +34,18 @@ router.get('/:id/:token', (req, res) => {
               (user, cb) => {
                   utils.getUserInfo(tinderToken, user.user_id, (err, data) => {
                       if (err) {
+                          console.log('bigdeal', err);
                           return cb(err, null);
                       }
                       return cb(null, data.results);
                   });
               },
               (err, data) => {
-                  if (err){
+                  if (err) {
                       console.log('ERROR3', err);
                   }
                   console.log('NINICO', data);
-                  res.render('results', { data: data });
+                  res.render('results', { data });
                   //res.json(data);
               });
 

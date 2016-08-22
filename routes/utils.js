@@ -1,30 +1,34 @@
+'use strict';
 const http = require('https');
 const qs = require('querystring');
 
 const utils = {};
 
-utils.getMyInfos = (facebook_id, facebook_token, cb) => {
-    const req_data = qs.stringify({
-        facebook_id: facebook_id,
-        facebook_token: facebook_token
-     });
+utils.getMyInfos = (facebookId, facebookToken, cb) => {
+    /* eslint-disable camelcase */
+    const credentials = {
+        facebook_id: facebookId,
+        facebook_token: facebookToken,
+    };
+    /* eslint-enable camelcase */
+    const reqData = qs.stringify(credentials);
 
     const options = {
-        "method": "POST",
-        "hostname": "api.gotinder.com",
-        "port": null,
-        "path": "/auth",
-        "headers": {
-            "cache-control": "no-cache",
-            "content-type": "application/x-www-form-urlencoded"
-        }
+        method: 'POST',
+        hostname: 'api.gotinder.com',
+        port: null,
+        path: '/auth',
+        headers: {
+            'cache-control': 'no-cache',
+            'content-type': 'application/x-www-form-urlencoded',
+        },
     };
 
-    const reqTinder = http.request(options, function (res) {
+    const reqTinder = http.request(options, res => {
         const chunks = [];
 
-        res.on('data', (chunk) => {
-          chunks.push(chunk);
+        res.on('data', chunk => {
+            chunks.push(chunk);
         });
 
         res.on('end', () => {
@@ -32,96 +36,94 @@ utils.getMyInfos = (facebook_id, facebook_token, cb) => {
             cb(null, JSON.parse(body.toString()));
         });
 
-        res.on('error', (err) => {
-          cb(err, null);
+        res.on('error', err => {
+            cb(err, null);
         });
-
     });
 
-    reqTinder.on('error', (err) => {
+    reqTinder.on('error', err => {
         cb(err, null);
     });
 
-    reqTinder.write(req_data)
+    reqTinder.write(reqData);
     reqTinder.end();
 };
 
-utils.getAllMyFBFriend = (tinder_token, cb) => {
+utils.getAllMyFBFriend = (tinderToken, cb) => {
     const options = {
-        "method": "GET",
-        "hostname": "api.gotinder.com",
-        "port": null,
-        "path": "/group/friends",
-        "headers": {
-            "x-auth-token": tinder_token,
-            "cache-control": "no-cache",
-        }
+        method: 'GET',
+        hostname: 'api.gotinder.com',
+        port: null,
+        path: '/group/friends',
+        headers: {
+            'x-auth-token': tinderToken,
+            'cache-control': 'no-cache',
+        },
     };
-    const reqTinder = http.request(options, function (res) {
+    const reqTinder = http.request(options, res => {
         const chunks = [];
 
-        res.on('data', (chunk) => {
-          chunks.push(chunk);
-        });
-
-        res.on('end', () => {
-          const body = Buffer.concat(chunks);
-          cb(null, JSON.parse(body.toString()));
-        });
-
-        res.on('error', (err) => {
-          cb(err, null);
-        });
-    });
-
-    reqTinder.on('error', (err) => {
-        cb(err, null);
-    });
-
-    reqTinder.end();
-}
-
-utils.getUserInfo = (tinder_token, tinder_id, cb) => {
-    const options = {
-        "method": "GET",
-        "hostname": "api.gotinder.com",
-        "port": null,
-        "path": "/user/"+tinder_id,
-        "headers": {
-            "x-auth-token": tinder_token,
-            "cache-control": "no-cache",
-        }
-    };
-
-    const reqTinder = http.request(options, function (res) {
-        const chunks = [];
-
-        res.on('data', (chunk) => {
-          chunks.push(chunk);
+        res.on('data', chunk => {
+            chunks.push(chunk);
         });
 
         res.on('end', () => {
             const body = Buffer.concat(chunks);
-            try{
-                const manonBody = JSON.parse(body.toString())
-            }catch(e){
+            cb(null, JSON.parse(body.toString()));
+        });
+
+        res.on('error', err => {
+            cb(err, null);
+        });
+    });
+
+    reqTinder.on('error', err => {
+        cb(err, null);
+    });
+
+    reqTinder.end();
+};
+
+utils.getUserInfo = (tinderToken, tinderId, cb) => {
+    const options = {
+        method: 'GET',
+        hostname: 'api.gotinder.com',
+        port: null,
+        path: `/user/${tinderId}`,
+        headers: {
+            'x-auth-token': tinderToken,
+            'cache-control': 'no-cache',
+        },
+    };
+    const reqTinder = http.request(options, res => {
+        const chunks = [];
+
+        res.on('data', chunk => {
+            chunks.push(chunk);
+        });
+
+        res.on('end', () => {
+            const body = Buffer.concat(chunks);
+            let manonBody;
+            try {
+                manonBody = JSON.parse(body.toString());
+            } catch (e) {
                 console.log('manonerror',e);
                 return cb(null, {});
             }
             return cb(null, manonBody);
         });
 
-        res.on('error', (err) => {
-            return cb(err, null)
+        res.on('error', err => {
+            return cb(err, null);
         });
-
     });
 
-    reqTinder.on('error', (err) => {
+    reqTinder.on('error', err => {
         cb(err, null);
     });
 
     reqTinder.end();
-}
+};
 
-module.exports = utils
+module.exports = utils;
