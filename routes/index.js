@@ -15,7 +15,7 @@ router.get('/:id/:token', (req, res) => {
       facebookToken,
       (err, data) => {
           if (err) {
-            console.log('ERROR', err);
+              console.log('ERROR', err);
           }
           const tinderToken = data.token;
           console.log('working', tinderToken);
@@ -25,10 +25,6 @@ router.get('/:id/:token', (req, res) => {
               }
               // foreach
               const users = data.results;
-              console.log('USERS', users);
-              // users.map((user) => {
-              //     console.log(user.user_id);
-              // })
 
               async.map(users,
               (user, cb) => {
@@ -44,19 +40,8 @@ router.get('/:id/:token', (req, res) => {
                   if (err) {
                       console.log('ERROR3', err);
                   }
-                  console.log('NINICO', data);
                   res.render('results', { data });
-                  //res.json(data);
               });
-
-              // const tinderId = '54660c346d7acda2371723fb';
-              // utils.getUserInfo(tinderToken, tinderId, (err, data) => {
-              //     if (err) {
-              //         console.log('ERROR3', err);
-              //     }
-              //     //console.log(data.results);
-              //     res.json(data.results);
-              // });
           });
       });
 });
